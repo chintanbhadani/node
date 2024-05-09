@@ -3,6 +3,7 @@ import cors from 'cors';
 import appRoutes from './src/routes';
 import dotenv from 'dotenv';
 import { customError } from './src/utils/respose';
+import { logger } from './src/utils/logger';
 
 dotenv.config();
 
@@ -17,5 +18,5 @@ app.use(appRoutes);
 const PORT = 8000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
+  logger.info(`Application is running on ${PORT}`);
 });

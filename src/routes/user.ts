@@ -4,6 +4,6 @@ import { getAllUsers } from '../controllers/user';
 
 const userRoutes = Router();
 
-userRoutes.post('/user', getAllUsers);
+userRoutes.get('/', getAllUsers);
 
 export default userRoutes;

@@ -8,6 +8,7 @@ import {
 } from '../utils/respose';
 import { createJwt } from '../utils/helper';
 import bcrypt from 'bcrypt';
+import { logger } from '../utils/logger';
 
 export const signUp = async (req: Request, res: Response) => {
   try {
@@ -32,6 +33,8 @@ export const signUp = async (req: Request, res: Response) => {
       data: { user, token },
     });
   } catch (error) {
+    logger.error(`Error in signUp ${error}`);
+
     return res.sendError(error, 'signUp');
   }
 };
@@ -56,6 +59,8 @@ export const login = async (req: Request, res: Response) => {
       data: { user, token },
     });
   } catch (error) {
+    logger.error(`Error in login ${error}`);
+
     return res.sendError(error, 'login');
   }
 };

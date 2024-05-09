@@ -3,6 +3,7 @@ import User, { UserModel } from '../models/user';
 import { DEFAULT_MESSAGE, DEFAULT_MESSAGE_TYPE, STATUS_CODE } from '../utils/respose';
 import { ONE } from '../utils/constant';
 import { Op, Order, WhereOptions } from 'sequelize';
+import { logger } from '../utils/logger';
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -17,7 +18,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
       offset = ((page ?? ONE) - ONE) * (limit ?? ONE);
 
     let whereOption: WhereOptions<UserModel> | undefined,
-      orderValue: Order = [['questionId', 'DESC']],
+      orderValue: Order = [['userId', 'DESC']],
       limitValue: number | undefined,
       offsetValue: number | undefined;
 
@@ -72,6 +73,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
       metaData,
     });
   } catch (error) {
+    logger.error(`Error in getAllUsers ${error}`);
+
     return res.sendError(error, 'getAllUser');
   }
 };
